@@ -6,15 +6,15 @@ on:
       - main
       - release/*
       - feat/*
-  # workflow_call:
-  #   inputs:
-  #     target_branch:
-  #       required: true
-  #       type: string
-  #     environment:
-  #       required: false
-  #       type: string
-  #       default: "development"
+  workflow_call:
+    inputs:
+      target_branch:
+        required: true
+        type: string
+      environment:
+        required: false
+        type: string
+        default: "pr-validate"
 
 jobs:
   # Frontend Jobs (React/Node.js)
