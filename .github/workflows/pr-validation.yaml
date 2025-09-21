@@ -26,10 +26,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
 
       - name: Install Frontend Dependencies
         run: echo "Installing frontend dependencies..."
@@ -46,10 +46,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
 
       - name: Run Frontend Code Scanner
         run: echo "Running frontend code scanner... (e.g., SonarQube scan, Snyk)"
@@ -63,10 +63,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
 
       - name: Run Frontend Unit Tests
         run: echo "Running frontend unit tests... (e.g., Jest)"
@@ -80,10 +80,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
 
       - name: Run Frontend E2E Tests
         run: echo "Running frontend end-to-end tests... (e.g., Cypress, Playwright)"
@@ -97,10 +97,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "20"
 
       - name: Build Frontend Application
         run: echo "Building frontend application... (e.g., npm run build)"
@@ -114,10 +114,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: "8.0.x"
 
       - name: Run Backend Linter (Code Quality)
         run: echo "Running backend linter... (e.g., Roslyn Analyzers, StyleCop)"
@@ -131,10 +131,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: "8.0.x"
 
       - name: Run Backend Code Scanner
         run: echo "Running backend code scanner... (e.g., SonarQube scan, Snyk)"
@@ -148,10 +148,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: "8.0.x"
 
       - name: Run Backend Unit Tests
         run: echo "Running backend unit tests... (e.g., NUnit, xUnit)"
@@ -165,10 +165,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: "8.0.x"
 
       - name: Run Backend Integration Tests
         run: echo "Running backend integration tests..."
@@ -182,10 +182,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
+      # - name: Setup .NET
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: "8.0.x"
 
       - name: Build Backend Application
         run: echo "Building backend application... (e.g., dotnet build)"
