@@ -205,3 +205,19 @@
 
 #       - name: Upload Backend-end Artifact
 #         run: echo "Upload Back end artifact ..."
+name: Main CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+      - release/*
+      - feat/*
+
+jobs:
+  call-build-test:
+    # uses: ./.github/workflows/pr-validation.yaml # Adjust branch if needed
+    uses: rknaik76/build-test@main
+    with:
+      target_branch: main
+      environment: production
