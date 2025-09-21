@@ -205,7 +205,7 @@
 
 #       - name: Upload Backend-end Artifact
 #         run: echo "Upload Back end artifact ..."
-name: Main CI/CD Pipeline
+name: PR Validation Pipeline
 
 on:
   pull_request:
