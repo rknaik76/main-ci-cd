@@ -1,0 +1,33 @@
+name: Reusable Build & Test Workflow
+
+on:
+  workflow_call:
+    inputs:
+      target_branch:
+        required: true
+        type: string
+      environment:
+        required: false
+        type: string
+        default: "pr-validate"
+      artifact_name:
+        required: false
+        type: string
+        default: "build-artifact"
+      webapp_name:
+        required: false
+        type: string
+        default: "my-web-app"
+
+jobs:
+  # Frontend Jobs (React/Node.js)
+  frontend_code_quality:
+    name: Frontend Code Quality
+    runs-on: ubuntu-latest
+    environment: pr-validate
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Artifact to Azure Web App
+        run: echo "Installing frontend dependencies..."
