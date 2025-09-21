@@ -7,7 +7,8 @@ on:
 
 jobs:
   call-build-test:
-    uses: ./.github/workflows/pr-validation.yaml # Adjust branch if needed
+    # uses: ./.github/workflows/pr-validation.yaml # Adjust branch if needed
+    uses: rknaik76/build-test@main
     with:
       target_branch: main
       environment: production

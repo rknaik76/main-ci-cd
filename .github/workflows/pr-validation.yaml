@@ -1,207 +1,207 @@
-name: Reusable Build & Test Workflow
+# name: Reusable Build & Test Workflow
 
-on:
-  pull_request:
-    branches:
-      - main
-      - release/*
-      - feat/*
-  workflow_call:
-    inputs:
-      target_branch:
-        required: true
-        type: string
-      environment:
-        required: false
-        type: string
-        default: "pr-validate"
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#       - release/*
+#       - feat/*
+#   workflow_call:
+#     inputs:
+#       target_branch:
+#         required: true
+#         type: string
+#       environment:
+#         required: false
+#         type: string
+#         default: "pr-validate"
 
-jobs:
-  # Frontend Jobs (React/Node.js)
-  frontend_code_quality:
-    name: Frontend Code Quality
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+# jobs:
+#   # Frontend Jobs (React/Node.js)
+#   frontend_code_quality:
+#     name: Frontend Code Quality
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "20"
+#       # - name: Setup Node.js
+#       #   uses: actions/setup-node@v4
+#       #   with:
+#       #     node-version: "20"
 
-      - name: Install Frontend Dependencies
-        run: echo "Installing frontend dependencies..."
+#       - name: Install Frontend Dependencies
+#         run: echo "Installing frontend dependencies..."
 
-      - name: Run Frontend Linter (Code Quality)
-        run: echo "Running frontend linter... (e.g., ESLint)"
+#       - name: Run Frontend Linter (Code Quality)
+#         run: echo "Running frontend linter... (e.g., ESLint)"
 
-  frontend_code_scan:
-    name: Frontend Code Scan
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: frontend_code_quality
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   frontend_code_scan:
+#     name: Frontend Code Scan
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: frontend_code_quality
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "20"
+#       # - name: Setup Node.js
+#       #   uses: actions/setup-node@v4
+#       #   with:
+#       #     node-version: "20"
 
-      - name: Run Frontend Code Scanner
-        run: echo "Running frontend code scanner... (e.g., SonarQube scan, Snyk)"
+#       - name: Run Frontend Code Scanner
+#         run: echo "Running frontend code scanner... (e.g., SonarQube scan, Snyk)"
 
-  frontend_unit_tests:
-    name: Frontend Unit Tests
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: frontend_code_quality
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   frontend_unit_tests:
+#     name: Frontend Unit Tests
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: frontend_code_quality
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "20"
+#       # - name: Setup Node.js
+#       #   uses: actions/setup-node@v4
+#       #   with:
+#       #     node-version: "20"
 
-      - name: Run Frontend Unit Tests
-        run: echo "Running frontend unit tests... (e.g., Jest)"
+#       - name: Run Frontend Unit Tests
+#         run: echo "Running frontend unit tests... (e.g., Jest)"
 
-  frontend_e2e_tests:
-    name: Frontend E2E Tests
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: frontend_unit_tests
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   frontend_e2e_tests:
+#     name: Frontend E2E Tests
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: frontend_unit_tests
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "20"
+#       # - name: Setup Node.js
+#       #   uses: actions/setup-node@v4
+#       #   with:
+#       #     node-version: "20"
 
-      - name: Run Frontend E2E Tests
-        run: echo "Running frontend end-to-end tests... (e.g., Cypress, Playwright)"
+#       - name: Run Frontend E2E Tests
+#         run: echo "Running frontend end-to-end tests... (e.g., Cypress, Playwright)"
 
-  frontend_build:
-    name: Frontend Build
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: [frontend_code_scan, frontend_e2e_tests]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   frontend_build:
+#     name: Frontend Build
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: [frontend_code_scan, frontend_e2e_tests]
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "20"
+#       # - name: Setup Node.js
+#       #   uses: actions/setup-node@v4
+#       #   with:
+#       #     node-version: "20"
 
-      - name: Build Frontend Application
-        run: echo "Building frontend application... (e.g., npm run build)"
+#       - name: Build Frontend Application
+#         run: echo "Building frontend application... (e.g., npm run build)"
 
-  # Backend Jobs (C#)
-  backend_code_quality:
-    name: Backend Code Quality
-    environment: pr-validate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   # Backend Jobs (C#)
+#   backend_code_quality:
+#     name: Backend Code Quality
+#     environment: pr-validate
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup .NET
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: "8.0.x"
+#       # - name: Setup .NET
+#       #   uses: actions/setup-dotnet@v4
+#       #   with:
+#       #     dotnet-version: "8.0.x"
 
-      - name: Run Backend Linter (Code Quality)
-        run: echo "Running backend linter... (e.g., Roslyn Analyzers, StyleCop)"
+#       - name: Run Backend Linter (Code Quality)
+#         run: echo "Running backend linter... (e.g., Roslyn Analyzers, StyleCop)"
 
-  backend_code_scan:
-    name: Backend Code Scan
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: backend_code_quality
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   backend_code_scan:
+#     name: Backend Code Scan
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: backend_code_quality
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup .NET
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: "8.0.x"
+#       # - name: Setup .NET
+#       #   uses: actions/setup-dotnet@v4
+#       #   with:
+#       #     dotnet-version: "8.0.x"
 
-      - name: Run Backend Code Scanner
-        run: echo "Running backend code scanner... (e.g., SonarQube scan, Snyk)"
+#       - name: Run Backend Code Scanner
+#         run: echo "Running backend code scanner... (e.g., SonarQube scan, Snyk)"
 
-  backend_unit_tests:
-    name: Backend Unit Tests
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: backend_code_quality
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   backend_unit_tests:
+#     name: Backend Unit Tests
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: backend_code_quality
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup .NET
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: "8.0.x"
+#       # - name: Setup .NET
+#       #   uses: actions/setup-dotnet@v4
+#       #   with:
+#       #     dotnet-version: "8.0.x"
 
-      - name: Run Backend Unit Tests
-        run: echo "Running backend unit tests... (e.g., NUnit, xUnit)"
+#       - name: Run Backend Unit Tests
+#         run: echo "Running backend unit tests... (e.g., NUnit, xUnit)"
 
-  backend_integration_tests:
-    name: Backend Integration Tests
-    environment: pr-validate
-    runs-on: ubuntu-latest
-    needs: backend_unit_tests
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   backend_integration_tests:
+#     name: Backend Integration Tests
+#     environment: pr-validate
+#     runs-on: ubuntu-latest
+#     needs: backend_unit_tests
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup .NET
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: "8.0.x"
+#       # - name: Setup .NET
+#       #   uses: actions/setup-dotnet@v4
+#       #   with:
+#       #     dotnet-version: "8.0.x"
 
-      - name: Run Backend Integration Tests
-        run: echo "Running backend integration tests..."
+#       - name: Run Backend Integration Tests
+#         run: echo "Running backend integration tests..."
 
-  backend_build:
-    name: Backend Build
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: [backend_code_scan, backend_integration_tests]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   backend_build:
+#     name: Backend Build
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: [backend_code_scan, backend_integration_tests]
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # - name: Setup .NET
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: "8.0.x"
+#       # - name: Setup .NET
+#       #   uses: actions/setup-dotnet@v4
+#       #   with:
+#       #     dotnet-version: "8.0.x"
 
-      - name: Build Backend Application
-        run: echo "Building backend application... (e.g., dotnet build)"
+#       - name: Build Backend Application
+#         run: echo "Building backend application... (e.g., dotnet build)"
 
-  # Combined Deployment Job (example)
-  deploy:
-    name: Upload Build artifacts
-    runs-on: ubuntu-latest
-    environment: pr-validate
-    needs: [frontend_build, backend_build]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#   # Combined Deployment Job (example)
+#   deploy:
+#     name: Upload Build artifacts
+#     runs-on: ubuntu-latest
+#     environment: pr-validate
+#     needs: [frontend_build, backend_build]
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Upload Front-end Artifact
-        run: echo "Upload Front end artifact ..."
+#       - name: Upload Front-end Artifact
+#         run: echo "Upload Front end artifact ..."
 
-      - name: Upload Backend-end Artifact
-        run: echo "Upload Back end artifact ..."
+#       - name: Upload Backend-end Artifact
+#         run: echo "Upload Back end artifact ..."
