@@ -1,0 +1,19 @@
+trigger: none
+pr:
+  branches:
+    include:
+      - main
+
+stages:
+# ---------------------
+# Stage 1: Build
+# ---------------------
+- stage: Build
+  displayName: "Build Stage"
+  jobs:
+    - job: BuildJob
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - script: echo "Building the application..."
+        - script: echo "PR Validation completed successfully!"

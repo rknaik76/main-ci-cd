@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+      - main
+pr: none
+
+stages:
+# ---------------------
+# Stage 1: Build
+# ---------------------
+- stage: Build
+  displayName: "Build Stage"
+  jobs:
+    - job: BuildJob
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - script: echo "Building the application..."
+        - script: echo "Running unit tests..."
+
+# ---------------------
+# Stage 2: Deploy
+# ---------------------
+- stage: Deploy
+  displayName: "Deploy Stage"
+  dependsOn: Build
+  jobs:
+    - job: DeployJob
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - script: echo "Deploying application..."
+        - script: echo "Deployment completed successfully!"
