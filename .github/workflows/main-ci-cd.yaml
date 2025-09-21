@@ -13,6 +13,7 @@ jobs:
       environment: production
 
   front-end-deployment:
+    name: Frontend Deployment
     needs: call-build-test
     uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
     with:
@@ -22,6 +23,7 @@ jobs:
       webapp_name: "my-frontend-webapp"
 
   back-end-deployment:
+    name: Backend Deployment
     needs: call-build-test
     uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
     with:
