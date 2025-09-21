@@ -1,4 +1,4 @@
-name: Reusable Build & Test Workflow
+name: Reusable Deployment Workflow
 
 on:
   workflow_call:
@@ -21,10 +21,10 @@ on:
 
 jobs:
   # Frontend Jobs (React/Node.js)
-  frontend_code_quality:
-    name: Frontend Code Quality
+  deploy_to_azure_web_app:
+    name: Deploy code to Azure Web App
     runs-on: ubuntu-latest
-    environment: pr-validate
+    environment: production
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
