@@ -11,3 +11,21 @@ jobs:
     with:
       target_branch: main
       environment: production
+
+  front-end-deployment:
+    needs: call-build-test
+    uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
+    with:
+      target_branch: main
+      environment: production
+      artifact_name: "my-app-artifact"
+      webapp_name: "my-frontend-webapp"
+
+  back-end-deployment:
+    needs: call-build-test
+    uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
+    with:
+      target_branch: main
+      environment: production
+      artifact_name: "my-app-artifact"
+      webapp_name: "my-backend-webapp"
