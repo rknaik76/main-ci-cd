@@ -7,27 +7,28 @@ on:
 
 jobs:
   call-build-test:
-    uses: ./.github/workflows/pr-validation.yaml # Adjust branch if needed
+    # uses: ./.github/workflows/pr-validation.yaml # Adjust branch if needed
+    uses: rknaik76/build-test/.github/workflows/ci.yaml@v1.0.0
     with:
       target_branch: main
       environment: production
 
-  front-end-deployment:
-    name: Frontend Deployment
-    needs: call-build-test
-    uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
-    with:
-      target_branch: main
-      environment: production
-      artifact_name: "my-app-artifact"
-      webapp_name: "my-frontend-webapp"
+  # front-end-deployment:
+  #   name: Frontend Deployment
+  #   needs: call-build-test
+  #   uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
+  #   with:
+  #     target_branch: main
+  #     environment: production
+  #     artifact_name: "my-app-artifact"
+  #     webapp_name: "my-frontend-webapp"
 
-  back-end-deployment:
-    name: Backend Deployment
-    needs: call-build-test
-    uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
-    with:
-      target_branch: main
-      environment: production
-      artifact_name: "my-app-artifact"
-      webapp_name: "my-backend-webapp"
+  # back-end-deployment:
+  #   name: Backend Deployment
+  #   needs: call-build-test
+  #   uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
+  #   with:
+  #     target_branch: main
+  #     environment: production
+  #     artifact_name: "my-app-artifact"
+  #     webapp_name: "my-backend-webapp"
