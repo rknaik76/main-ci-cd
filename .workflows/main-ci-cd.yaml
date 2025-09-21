@@ -1,0 +1,13 @@
+name: Main CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-build-test:
+    uses: ./.github/workflows/pr-validation.yml@main # Adjust branch if needed
+    with:
+      target_branch: main
+      environment: production
