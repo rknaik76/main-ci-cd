@@ -6,18 +6,6 @@ on:
       - main
 
 jobs:
-  call-frontend-unit-tests:
-    uses: rknaik76/build-test/.github/workflows/fe-ut.yaml@v2.0.0
-    with:
-      target_branch: main
-      environment: production
-
-  call-backend-unit-tests:
-    uses: rknaik76/build-test/.github/workflows/be-ut.yaml@v2.0.0
-    with:
-      target_branch: main
-      environment: production
-
   call-frontend-build:
     needs: [call-frontend-unit-tests]
     uses: rknaik76/build-test/.github/workflows/fe-build.yaml@v2.0.0
@@ -39,6 +27,7 @@ jobs:
     with:
       target_branch: main
       environment: production
+      scan_type: heavy # Lite or heavy
       sonar_project_key: "${{ secrets.SONARQUBE_PROJECT_KEY }}"
       sonar_organization: "${{ secrets.SONARQUBE_ORGANIZATION }}"
 
