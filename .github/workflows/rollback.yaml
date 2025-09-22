@@ -12,7 +12,7 @@ on:
           - staging
           - production
       version:
-        description: "Enter the semantic version (e.g., 1.4.0 or 2.1.3+9826)"
+        description: "Enter the semantic version (e.g., 1.4.0)"
         required: true
         type: string
 
