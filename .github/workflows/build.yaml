@@ -43,29 +43,29 @@ jobs:
       sonar_project_key: ${{ secrets.SONARQUBE_PROJECT_KEY }}
       sonar_organization: ${{ secrets.SONARQUBE_ORGANIZATION }}
 
-  veracode-scan-frontend:
-    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v5.0.0
-    needs: [frontend-build]
-    with:
-      target_branch: main
-      environment: production
-    secrets:
-      veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
-      veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
-      veracode_api_key_id: ${{ secrets.VERACODE_API_KEY_ID }}
-      veracode_api_key_secret: ${{ secrets.VERACODE_API_KEY_SECRET }}
+  # veracode-scan-frontend:
+  #   uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v5.0.0
+  #   needs: [frontend-build]
+  #   with:
+  #     target_branch: main
+  #     environment: production
+  #   secrets:
+  #     veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
+  #     veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
+  #     veracode_api_key_id: ${{ secrets.VERACODE_API_KEY_ID }}
+  #     veracode_api_key_secret: ${{ secrets.VERACODE_API_KEY_SECRET }}
 
-  veracode-scan-backend:
-    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v5.0.0
-    needs: [backend-build]
-    with:
-      target_branch: main
-      environment: production
-    secrets:
-      veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
-      veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
-      veracode_api_key_id: ${{ secrets.VERACODE_API_KEY_ID }}
-      veracode_api_key_secret: ${{ secrets.VERACODE_API_KEY_SECRET }}
+  # veracode-scan-backend:
+  #   uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v5.0.0
+  #   needs: [backend-build]
+  #   with:
+  #     target_branch: main
+  #     environment: production
+  #   secrets:
+  #     veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
+  #     veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
+  #     veracode_api_key_id: ${{ secrets.VERACODE_API_KEY_ID }}
+  #     veracode_api_key_secret: ${{ secrets.VERACODE_API_KEY_SECRET }}
 
   # front-end-deployment:
   #   name: Frontend Deployment
