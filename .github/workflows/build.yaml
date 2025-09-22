@@ -8,21 +8,21 @@ on:
 
 jobs:
   frontend-build:
-    uses: rknaik76/build-test/.github/workflows/fe-build.yaml@v4.0.0
+    uses: rknaik76/build-test/.github/workflows/fe-build.yaml@v5.0.0
     with:
       target_branch: main
       environment: production
       artifact_name: front-end-${{ github.run_id }}.zip
 
   backend-build:
-    uses: rknaik76/build-test/.github/workflows/be-build.yaml@v4.0.0
+    uses: rknaik76/build-test/.github/workflows/be-build.yaml@v5.0.0
     with:
       target_branch: main
       environment: production
       artifact_name: back-end-${{ github.run_id }}.zip
 
   sonarqube-heavy-scan:
-    uses: rknaik76/build-test/.github/workflows/sonarqube.yaml@v4.0.0
+    uses: rknaik76/build-test/.github/workflows/sonarqube.yaml@v5.0.0
     with:
       target_branch: main
       environment: production
@@ -32,7 +32,7 @@ jobs:
       sonar_organization: ${{ secrets.SONARQUBE_ORGANIZATION }}
 
   veracode-scan-frontend:
-    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v4.0.0
+    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v5.0.0
     needs: [frontend-build]
     with:
       target_branch: main
@@ -44,7 +44,7 @@ jobs:
       veracode_api_key_secret: ${{ secrets.VERACODE_API_KEY_SECRET }}
 
   veracode-scan-backend:
-    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v4.0.0
+    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v5.0.0
     needs: [backend-build]
     with:
       target_branch: main
@@ -59,7 +59,7 @@ jobs:
   #   name: Frontend Deployment
   #   needs: [veracode-scan-frontend, sonarqube-heavy-scan, call-frontend-build]
   #   # uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
-  #   uses: rknaik76/build-test/.github/workflows/deployment.yaml@v4.0.0
+  #   uses: rknaik76/build-test/.github/workflows/deployment.yaml@v5.0.0
   #   with:
   #     target_branch: main
   #     environment: production
@@ -69,7 +69,7 @@ jobs:
   # back-end-deployment:
   #   name: Backend Deployment
   #   needs: call-build-test
-  #   uses: rknaik76/build-test/.github/workflows/deployment.yaml@v4.0.0 # Adjust branch if needed
+  #   uses: rknaik76/build-test/.github/workflows/deployment.yaml@v5.0.0 # Adjust branch if needed
   #   with:
   #     target_branch: main
   #     environment: production
