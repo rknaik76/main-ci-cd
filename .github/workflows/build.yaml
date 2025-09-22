@@ -7,8 +7,19 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
+  sonarqube-front-end:
+    uses: rknaik76/build-test/.github/workflows/sonarqube.yaml@v5.0.0
+    with:
+      target_branch: main
+      environment: production
+      scan_type: heavy
+    secrets:
+      sonar_project_key: ${{ secrets.SONARQUBE_PROJECT_KEY }}
+      sonar_organization: ${{ secrets.SONARQUBE_ORGANIZATION }}
+
   frontend-build:
     uses: rknaik76/build-test/.github/workflows/fe-build.yaml@v5.0.0
+    needs: [sonarqube-front-end]
     with:
       target_branch: main
       environment: production
@@ -21,8 +32,9 @@ jobs:
       environment: production
       artifact_name: back-end-${{ github.run_id }}.zip
 
-  sonarqube-heavy-scan:
+  sonarqube-back-end:
     uses: rknaik76/build-test/.github/workflows/sonarqube.yaml@v5.0.0
+    needs: [backend-build]
     with:
       target_branch: main
       environment: production
