@@ -7,16 +7,14 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
-  call-frontend-build:
-    needs: [call-frontend-unit-tests]
+  frontend-build:
     uses: rknaik76/build-test/.github/workflows/fe-build.yaml@v2.0.0
     with:
       target_branch: main
       environment: production
       artifact_name: front-end-${{ github.run_id }}.zip
 
-  call-backend-build:
-    needs: [call-backend-unit-tests]
+  backend-build:
     uses: rknaik76/build-test/.github/workflows/be-build.yaml@v2.0.0
     with:
       target_branch: main
@@ -28,31 +26,34 @@ jobs:
     with:
       target_branch: main
       environment: production
-      scan_type: heavy # Lite or heavy
-      sonar_project_key: "${{ secrets.SONARQUBE_PROJECT_KEY }}"
-      sonar_organization: "${{ secrets.SONARQUBE_ORGANIZATION }}"
+      scan_type: heavy
+    secrets:
+      sonar_project_key: ${{ secrets.SONARQUBE_PROJECT_KEY }}
+      sonar_organization: ${{ secrets.SONARQUBE_ORGANIZATION }}
 
   veracode-scan-frontend:
     uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v2.0.0
-    needs: [call-frontend-build]
+    needs: [frontend-build]
     with:
       target_branch: main
       environment: production
-      veracode_app_id: "${{ secrets.VERACODE_APP_ID }}"
-      veracode_app_name: "${{ secrets.VERACODE_APP_NAME }}"
-      veracode_api_key_id: "${{ secrets.VERACODE_API_KEY_ID }}"
       artifact_name: front-end-${{ github.run_id }}.zip
+    secrets:
+      veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
+      veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
+      veracode_api_key_id: ${{ secrets.VERACODE_API_KEY_ID }}
 
   veracode-scan-backend:
     uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v2.0.0
-    needs: [call-backend-build]
+    needs: [backend-build]
     with:
       target_branch: main
       environment: production
-      veracode_app_id: "${{ secrets.VERACODE_APP_ID }}"
-      veracode_app_name: "${{ secrets.VERACODE_APP_NAME }}"
-      veracode_api_key_id: "${{ secrets.VERACODE_API_KEY_ID }}"
       artifact_name: back-end-${{ github.run_id }}.zip
+    secrets:
+      veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
+      veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
+      veracode_api_key_id: ${{ secrets.VERACODE_API_KEY_ID }}
 
   # front-end-deployment:
   #   name: Frontend Deployment
