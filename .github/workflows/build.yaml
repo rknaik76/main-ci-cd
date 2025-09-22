@@ -43,6 +43,16 @@ jobs:
       sonar_project_key: ${{ secrets.SONARQUBE_PROJECT_KEY }}
       sonar_organization: ${{ secrets.SONARQUBE_ORGANIZATION }}
 
+  upload-backend-artifact:
+    name: Upload Backend Artifact
+    needs: [backend-build, sonarqube-back-end]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Backend Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: backend-artifact
+
   # veracode-scan-frontend:
   #   uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v5.0.0
   #   needs: [frontend-build]
