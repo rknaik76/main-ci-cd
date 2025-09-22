@@ -22,7 +22,7 @@ jobs:
       artifact_name: back-end-${{ github.run_id }}.zip
 
   sonarqube-heavy-scan:
-    uses: rknaik76/build-test/.github/workflows/sonarqube-full.yaml@v3.0.0
+    uses: rknaik76/build-test/.github/workflows/sonarqube.yaml@v3.0.0
     with:
       target_branch: main
       environment: production
