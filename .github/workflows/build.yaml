@@ -1,0 +1,86 @@
+name: Main CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-frontend-unit-tests:
+    uses: rknaik76/build-test/.github/workflows/fe-ut.yaml@v2.0.0
+    with:
+      target_branch: main
+      environment: production
+
+  call-backend-unit-tests:
+    uses: rknaik76/build-test/.github/workflows/be-ut.yaml@v2.0.0
+    with:
+      target_branch: main
+      environment: production
+
+  call-frontend-build:
+    needs: [call-frontend-unit-tests]
+    uses: rknaik76/build-test/.github/workflows/fe-build.yaml@v2.0.0
+    with:
+      target_branch: main
+      environment: production
+      artifact_name: front-end-${{ github.run_id }}.zip
+
+  call-backend-build:
+    needs: [call-backend-unit-tests]
+    uses: rknaik76/build-test/.github/workflows/be-build.yaml@v2.0.0
+    with:
+      target_branch: main
+      environment: production
+      artifact_name: back-end-${{ github.run_id }}.zip
+
+  sonarqube-heavy-scan:
+    uses: rknaik76/build-test/.github/workflows/sonarqube-full.yaml@v2.0.0
+    with:
+      target_branch: main
+      environment: production
+      sonar_project_key: "${{ secrets.SONARQUBE_PROJECT_KEY }}"
+      sonar_organization: "${{ secrets.SONARQUBE_ORGANIZATION }}"
+
+  veracode-scan-frontend:
+    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v2.0.0
+    needs: [call-frontend-build]
+    with:
+      target_branch: main
+      environment: production
+      veracode_app_id: "${{ secrets.VERACODE_APP_ID }}"
+      veracode_app_name: "${{ secrets.VERACODE_APP_NAME }}"
+      veracode_api_key_id: "${{ secrets.VERACODE_API_KEY_ID }}"
+      artifact_name: front-end-${{ github.run_id }}.zip
+
+  veracode-scan-backend:
+    uses: rknaik76/build-test/.github/workflows/veracode-scan.yaml@v2.0.0
+    needs: [call-backend-build]
+    with:
+      target_branch: main
+      environment: production
+      veracode_app_id: "${{ secrets.VERACODE_APP_ID }}"
+      veracode_app_name: "${{ secrets.VERACODE_APP_NAME }}"
+      veracode_api_key_id: "${{ secrets.VERACODE_API_KEY_ID }}"
+      artifact_name: back-end-${{ github.run_id }}.zip
+
+  # front-end-deployment:
+  #   name: Frontend Deployment
+  #   needs: [veracode-scan-frontend, sonarqube-heavy-scan, call-frontend-build]
+  #   # uses: ./.github/workflows/deployment.yaml # Adjust branch if needed
+  #   uses: rknaik76/build-test/.github/workflows/deployment.yaml@v2.0.0
+  #   with:
+  #     target_branch: main
+  #     environment: production
+  #     artifact_name: "front-end-artifact"
+  #     webapp_name: "my-frontend-webapp"
+
+  # back-end-deployment:
+  #   name: Backend Deployment
+  #   needs: call-build-test
+  #   uses: rknaik76/build-test/.github/workflows/deployment.yaml@v2.0.0 # Adjust branch if needed
+  #   with:
+  #     target_branch: main
+  #     environment: production
+  #     artifact_name: "backend-artifact"
+  #     webapp_name: "my-backend-webapp"
