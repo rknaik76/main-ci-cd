@@ -11,6 +11,14 @@ on:
           - development
           - staging
           - production
+      component:
+        description: "Select the App component to rollback"
+        required: true
+        type: choice
+        options:
+          - front-end
+          - back-end
+          - database
       version:
         description: "Enter the semantic version (e.g., 1.4.0)"
         required: true
