@@ -37,7 +37,6 @@ jobs:
     with:
       target_branch: main
       environment: production
-      artifact_name: front-end-${{ github.run_id }}.zip
     secrets:
       veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
       veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
@@ -50,7 +49,6 @@ jobs:
     with:
       target_branch: main
       environment: production
-      artifact_name: back-end-${{ github.run_id }}.zip
     secrets:
       veracode_app_id: ${{ secrets.VERACODE_APP_ID }}
       veracode_app_name: ${{ secrets.VERACODE_APP_NAME }}
