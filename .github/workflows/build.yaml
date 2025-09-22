@@ -7,8 +7,15 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
+  frontend-linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Front-end Linting
+        run: echo "Installing frontend dependencies..."
+
   sonarqube-front-end:
     uses: rknaik76/build-test/.github/workflows/sonarqube.yaml@v5.0.0
+    needs: [frontend-linting]
     with:
       target_branch: main
       environment: production
